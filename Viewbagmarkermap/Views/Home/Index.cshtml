@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="sample" style="width:1280px; height:800px;"></div>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR-GOOGLE-MAPS-API-KEY&loading=async&callback=initMap">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js" integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        window.onload = function () {
+
+            var mapOptions = {
+                center: new google.maps.LatLng(39.373341, 38.662109),
+                zoom: 7
+            }
+
+            var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+            map.addListener("click", (e) => {
+
+                var lat = JSON.stringify(e.latLng.lat())
+                var long = JSON.stringify(e.latLng.lng())
+
+                alert(lat);
+                alert(long);
+                var myLatLong = e.latLng;
+                var stringified_t = JSON.stringify(myLatLong);
+                alert(myLatLong);
+
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(myLatLong),
+                    map: map,
+                });
+
+
+
+
+                axios.post('api/LocationsAPI', {
+                    name: "nice",
+                    description: "good",
+                    latitude: lat,
+                    longitude: long,
+
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
+
+
+
+            });
+
+
+
+
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(37.088291, 38.442383),
+                map: map,
+            });
+
+
+
+
+        }
+
+    </script>
+</body>
+</html>
