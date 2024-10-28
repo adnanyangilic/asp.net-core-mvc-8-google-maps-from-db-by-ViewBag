@@ -16,17 +16,7 @@ namespace Viewbagmarkermap.Data
 
 
 
-       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<Location>(
-                    lo =>
-                    {
-                        lo.HasNoKey();
-                        lo.ToView("View_Locations");
-                       
-                    });
-        }*/
+    
 
 
 
